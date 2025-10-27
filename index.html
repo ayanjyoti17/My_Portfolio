@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayan Jyoti | Aspiring DevOps Engineer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* --- Custom Styles with Theme Variables --- */
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #111827;
+            --text-muted-color: #4b5563;
+            --accent-color: #f97316; /* Orange */
+            --accent-glow-color: rgba(249, 115, 22, 0.7); /* Orange Glow */
+            --project-overlay-color: rgba(249, 115, 22, 0.8); /* Orange Overlay */
+            --border-color: #d1d5db;
+            --card-border-color: #e5e7eb;
+            --btn-primary-bg: #f97316; /* Orange */
+            --btn-primary-text: #ffffff;
+            --btn-primary-hover-bg: #fb923c; /* Lighter Orange */
+            --btn-secondary-hover-bg: #f3f4f6;
+            --header-bg: rgba(255, 255, 255, 0.8);
+            --skill-pill-bg: rgba(209, 213, 219, 0.5); /* gray-300 with opacity */
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --card-hover-bg: #fff7ed; /* orange-50 */
+        }
+
+        html.dark {
+            --bg-color: #0a0a0a;
+            --text-color: #e0e0e0;
+            --text-muted-color: #9ca3af;
+            --accent-color: #818cf8; /* Indigo */
+            --accent-glow-color: rgba(129, 140, 248, 0.5); /* Indigo Glow */
+            --project-overlay-color: rgba(129, 140, 248, 0.8); /* Indigo Overlay */
+            --border-color: #374151;
+            --card-border-color: #374151;
+            --btn-primary-bg: #818cf8; /* Indigo */
+            --btn-primary-text: #0a0a0a;
+            --btn-primary-hover-bg: #a5b4fc; /* Lighter Indigo */
+            --btn-secondary-hover-bg: #1f2937;
+            --header-bg: rgba(10, 10, 10, 0.7);
+            --skill-pill-bg: rgba(55, 65, 81, 0.5); /* gray-700 with opacity */
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+            --card-hover-bg: #1e293b; /* slate-800 */
+        }
+        
+        body {
+            font-family: 'IBM Plex Mono', monospace;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        header {
+            background-color: var(--header-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: background-color 0.3s ease;
+        }
+
+        .accent-color {
+            color: var(--accent-color);
+        }
+        
+        .text-muted {
+            color: var(--text-muted-color);
+        }
+
+        .nav-link {
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-color);
+        }
+        
+        .btn {
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-align: center;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.25rem;
+            font-size: 0.8rem;
+        }
+
+        .btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .btn:hover i {
+            transform: translateX(4px);
+        }
+
+        .btn-primary {
+            background-color: var(--btn-primary-bg);
+            color: var(--btn-primary-text);
+            border: 1px solid var(--btn-primary-bg);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--btn-primary-hover-bg);
+            border-color: var(--btn-primary-hover-bg);
+        }
+
+        .btn-secondary {
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            background-color: transparent;
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--accent-color);
+            color: var(--btn-primary-text);
+        }
+
+        .profile-glow {
+            border-radius: 50%;
+            box-shadow: 0 0 15px var(--accent-glow-color),
+                        0 0 30px var(--accent-glow-color),
+                        0 0 60px var(--accent-glow-color);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .form-input {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+        
+        .card {
+             border: 1px solid var(--card-border-color);
+             background-color: var(--bg-color);
+             transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-shadow);
+            background-color: var(--card-hover-bg);
+        }
+        
+        .group .card-content {
+             transition: background-color 0.3s ease;
+        }
+
+        .group:hover .card-content {
+             background-color: var(--card-hover-bg);
+        }
+        
+        .footer {
+            border-top: 1px solid var(--border-color);
+            transition: border-color 0.3s ease;
+        }
+
+        .skill-pill {
+            background-color: var(--skill-pill-bg);
+            transition: background-color 0.3s ease;
+        }
+
+        #role-title::after {
+            content: '|';
+            animation: blink 1s infinite;
+            color: var(--accent-color);
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+        }
+        
+        .animated-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animated-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-image {
+            transition: transform 0.3s ease-out;
+        }
+
+        .group:hover .project-image {
+            transform: scale(1.05);
+        }
+        
+        .project-overlay {
+            background-color: var(--project-overlay-color);
+            transition: opacity 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header & Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50">
+        <div class="container mx-auto px-6 py-5">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-xl font-bold"><span class="accent-color">./</span>Ayan Jyoti</a>
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#skills" class="nav-link">Skills</a>
+                    <a href="#education" class="nav-link">Education</a>
+                    <a href="#projects" class="nav-link">Projects</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-black/10 dark:hover:bg-white/10" aria-label="Toggle theme">
+                        <i data-lucide="sun" class="w-5 h-5 hidden" id="sun-icon"></i>
+                        <i data-lucide="moon" class="w-5 h-5 hidden" id="moon-icon"></i>
+                    </button>
+                </nav>
+                <button id="mobile-menu-button" class="md:hidden">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+             <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 bg-gray-900/80 backdrop-blur-sm rounded-lg p-4 border border-gray-700">
+                <a href="#home" class="block py-2 text-center nav-link">Home</a>
+                <a href="#about" class="block py-2 text-center nav-link">About</a>
+                <a href="#skills" class="block py-2 text-center nav-link">Skills</a>
+                <a href="#education" class="block py-2 text-center nav-link">Education</a>
+                <a href="#projects" class="block py-2 text-center nav-link">Projects</a>
+                <a href="#contact" class="block mt-2 text-center btn btn-primary w-full">Contact Me <i data-lucide="mail" class="w-4 h-4"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6">
+
+        <!-- Home Section -->
+        <section id="home" class="min-h-screen flex flex-col md:flex-row items-center justify-center gap-10 md:gap-20">
+            <div class="md:w-1/3 mt-20 md:mt-0 flex-shrink-0">
+                <div class="relative inline-block">
+                    <img src="./image/MyPicture.jpg" alt="Ayan Jyoti" class="rounded-full w-64 h-64 md:w-80 md:h-80 object-cover profile-glow">
+                </div>
+            </div>
+            <div class="md:w-2/3 text-center md:text-left">
+                <p class="text-xl md:text-2xl text-muted">Hello, I'm</p>
+                <h1 class="text-4xl md:text-6xl font-bold my-2">Ayan Jyoti</h1>
+                <p id="role-title" class="text-xl md:text-2xl accent-color mb-6 h-8"></p>
+                <div class="flex flex-col items-center md:items-start space-y-3 mb-8">
+                    <a href="https://github.com/ayanjyoti17" target="_blank" class="flex items-center gap-2 nav-link w-max">
+                        <i data-lucide="github" class="w-5 h-5"></i>
+                        <span>github.com/ayanjyoti17</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/ayan-jyoti-b312b223a/" target="_blank" class="flex items-center gap-2 nav-link w-max">
+                        <i data-lucide="linkedin" class="w-5 h-5"></i>
+                        <span>linkedin.com/in/ayanjyoti17</span>
+                    </a>
+                </div>
+                <div class="flex justify-center md:justify-start space-x-4">
+                    <!-- Make sure to place your resume PDF in the same folder as this HTML file -->
+                    <a href="./Ayan_Jyoti_Resume.pdf" download="Ayan_Jyoti_Resume.pdf" class="btn btn-primary">Download Resume <i data-lucide="download" class="w-4 h-4"></i></a>
+                    <a href="#projects" class="btn btn-secondary">View Projects <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about" class="py-20">
+            <div class="max-w-5xl mx-auto animated-section">
+                 <h2 class="text-3xl font-bold text-center mb-12"><span class="accent-color">./</span>Who I Am</h2>
+                <div class="card p-8 md:p-12 rounded-lg">
+                    <div class="grid md:grid-cols-3 gap-12 items-center">
+                        <div class="md:col-span-2">
+                            <p class="text-lg text-muted leading-relaxed mb-6">
+                                Hello! I'm Ayan Jyoti, a recent Computer Science Engineering graduate with a strong passion for cloud technologies and the DevOps culture. My journey in tech is driven by a fascination with automating complex processes and building systems that are not only powerful but also reliable and scalable.
+                            </p>
+                            <p class="text-lg text-muted leading-relaxed">
+                                I thrive on bridging the gap between development and operations. From containerizing applications with Docker to provisioning infrastructure as code with Terraform, I enjoy working with the tools that power modern software delivery. I'm a quick learner, a collaborative team player, and I'm eager to apply my skills to solve real-world challenges.
+                            </p>
+                        </div>
+                        <div class="md:col-span-1 space-y-6">
+                            <div class="flex items-start gap-4">
+                                <i data-lucide="cloud-cog" class="w-8 h-8 accent-color flex-shrink-0 mt-1"></i>
+                                <div>
+                                    <h3 class="font-semibold">Cloud & DevOps</h3>
+                                    <p class="text-sm text-muted">Passionate about building scalable infrastructure on the cloud.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <i data-lucide="repeat" class="w-8 h-8 accent-color flex-shrink-0 mt-1"></i>
+                                <div>
+                                    <h3 class="font-semibold">Automation</h3>
+                                    <p class="text-sm text-muted">Focused on CI/CD and automating workflows for efficiency.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <i data-lucide="users" class="w-8 h-8 accent-color flex-shrink-0 mt-1"></i>
+                                <div>
+                                    <h3 class="font-semibold">Team Player</h3>
+                                    <p class="text-sm text-muted">A collaborative problem-solver ready to contribute.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-20">
+            <h2 class="text-3xl font-bold text-center mb-12"><span class="accent-color">./</span>Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card p-6 rounded-lg animated-section">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center"><i data-lucide="cloud" class="w-6 h-6 mr-3 accent-color"></i>Cloud Platforms</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-pill text-sm font-medium px-3 py-1 rounded-full">AWS</span>
+                    </div>
+                </div>
+                <div class="card p-6 rounded-lg animated-section">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center"><i data-lucide="box" class="w-6 h-6 mr-3 accent-color"></i>Containerization</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-pill text-sm font-medium px-3 py-1 rounded-full">Docker</span>
+                        <span class="skill-pill text-sm font-medium px-3 py-1 rounded-full">Kubernetes</span>
+                    </div>
+                </div>
+                <div class="card p-6 rounded-lg animated-section">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center"><i data-lucide="repeat" class="w-6 h-6 mr-3 accent-color"></i>CI/CD</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-pill text-sm font-medium px-3 py-1 rounded-full">Jenkins</span>
+                        <span class="skill-pill text-sm font-medium px-3 py-1 rounded-full">GitHub Actions</span>
+                    </div>
+                </div>
+                <div class="card p-6 rounded-lg animated-section">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center"><i data-lucide="server" class="w-6 h-6 mr-3 accent-color"></i>IaC</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-pill text-sm font-medium px-3 py-1 rounded-full">Terraform</span>
+                        <span class="skill-pill text-sm font-medium px-3 py-1 rounded-full">Ansible</span>
+                    </div>
+                </div>
+                <div class="card p-6 rounded-lg animated-section">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center"><i data-lucide="terminal" class="w-6 h-6 mr-3 accent-color"></i>Scripting</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-pill text-sm font-medium px-3 py-1 rounded-full">Python</span>
+                        <span class="skill-pill text-sm font-medium px-3 py-1 rounded-full">Bash</span>
+                    </div>
+                </div>
+                <div class="card p-6 rounded-lg animated-section">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center"><i data-lucide="bar-chart-2" class="w-6 h-6 mr-3 accent-color"></i>Monitoring</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-pill text-sm font-medium px-3 py-1 rounded-full">Prometheus</span>
+                        <span class="skill-pill text-sm font-medium px-3 py-1 rounded-full">Grafana</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="py-20">
+            <h2 class="text-3xl font-bold text-center mb-16"><span class="accent-color">./</span>Education</h2>
+            <div class="relative max-w-2xl mx-auto">
+                <div class="absolute left-1/2 w-0.5 h-full bg-[var(--border-color)] -translate-x-1/2"></div>
+                <!-- Education Item 1 -->
+                <div class="relative mb-8 animated-section">
+                    <div class="flex justify-center mb-4">
+                        <div class="z-10 bg-[var(--bg-color)] p-2 rounded-full border-2 border-[var(--accent-color)]">
+                            <i data-lucide="graduation-cap" class="w-6 h-6 accent-color"></i>
+                        </div>
+                    </div>
+                    <div class="card p-6 rounded-lg w-full md:w-11/12 mx-auto">
+                        <p class="text-right text-sm text-muted mb-1">2021 - 2025</p>
+                        <h3 class="text-xl font-semibold">Bachelor of Technology, CSE</h3>
+                        <p class="text-muted">Academy of Technology, Adisaptagram</p>
+                        <p class="text-muted mt-2">CGPA: 8.05</p>
+                    </div>
+                </div>
+                <!-- Education Item 2 -->
+                <div class="relative mb-8 animated-section">
+                    <div class="flex justify-center mb-4">
+                        <div class="z-10 bg-[var(--bg-color)] p-2 rounded-full border-2 border-[var(--accent-color)]">
+                             <i data-lucide="book-open" class="w-6 h-6 accent-color"></i>
+                        </div>
+                    </div>
+                     <div class="card p-6 rounded-lg w-full md:w-11/12 mx-auto">
+                        <p class="text-right text-sm text-muted mb-1">2018 - 2020</p>
+                        <h3 class="text-xl font-semibold">Higher Secondary (XII)</h3>
+                        <p class="text-muted">Singur Mahamaya High School</p>
+                        <p class="text-muted mt-2">Percentage: 84.5%</p>
+                    </div>
+                </div>
+                 <!-- Education Item 3 -->
+                <div class="relative animated-section">
+                    <div class="flex justify-center mb-4">
+                        <div class="z-10 bg-[var(--bg-color)] p-2 rounded-full border-2 border-[var(--accent-color)]">
+                           <i data-lucide="pencil" class="w-6 h-6 accent-color"></i>
+                        </div>
+                    </div>
+                    <div class="card p-6 rounded-lg w-full md:w-11/12 mx-auto">
+                        <p class="text-right text-sm text-muted mb-1">2018</p>
+                        <h3 class="text-xl font-semibold">Secondary (X)</h3>
+                        <p class="text-muted">Singur Mahamaya High School</p>
+                        <p class="text-muted mt-2">Percentage: 82%</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-20">
+            <h2 class="text-3xl font-bold text-center mb-12"><span class="accent-color">./</span>Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Project 1 -->
+                <div class="card group rounded-lg overflow-hidden animated-section flex flex-col">
+                     <div class="relative overflow-hidden">
+                        <img src="https://placehold.co/600x400/0a0a0a/fb923c?text=Project+1" class="w-full h-56 object-cover project-image" alt="Project 1">
+                        <div class="absolute inset-0 project-overlay flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        </div>
+                    </div>
+                    <div class="p-6 card-content flex flex-col flex-grow">
+                        <h3 class="text-xl font-semibold mb-2">CI/CD Pipeline for a Web App</h3>
+                        <p class="text-muted mb-4 text-sm flex-grow">
+                            Automated the deployment of a containerized Node.js application by building a complete CI/CD pipeline with GitHub Actions, Docker, and AWS EC2</span>.
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-sm accent-color my-4">
+                            <span>Github Actions</span><span>•</span><span>Docker</span><span>•</span><span>Docker Hub</span><span>•</span><span>AWS</span>
+                        </div>
+                        <div class="flex justify-end items-center gap-4">
+                           <a href="https://github.com/ayanjyoti17/cicd-pipeline-project.git" target="_blank" class="btn btn-secondary">View Code <i data-lucide="github" class="w-4 h-4"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="card group rounded-lg overflow-hidden animated-section flex flex-col" style="transition-delay: 100ms;">
+                     <div class="relative overflow-hidden">
+                        <img src="https://placehold.co/600x400/0a0a0a/fb923c?text=Project+2" class="w-full h-56 object-cover project-image" alt="Project 2">
+                        <div class="absolute inset-0 project-overlay flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        </div>
+                    </div>
+                    <div class="p-6 card-content flex flex-col flex-grow">
+                        <h3 class="text-xl font-semibold mb-2">Automated AWS Infrastructure</h3>
+                        <p class="text-muted mb-4 text-sm flex-grow">
+                            Used Terraform to Provision a 3-Tier Web Architecture on AWS <span class="font-bold"></span>.
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-sm accent-color my-4">
+                            <span>Terraform</span><span>•</span><span>AWS</span><span>•</span><span>VPC</span><span>•</span><span>EC2</span>
+                        </div>
+                        <div class="flex justify-end items-center gap-4">
+                           <a href="https://github.com/ayanjyoti17/3-Tier-Web-Architecture-on-AWS-with-Terraform" target="_blank" class="btn btn-secondary">View Code <i data-lucide="github" class="w-4 h-4"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="card group rounded-lg overflow-hidden animated-section flex flex-col" style="transition-delay: 200ms;">
+                     <div class="relative overflow-hidden">
+                        <img src="https://placehold.co/600x400/0a0a0a/fb923c?text=Project+3" class="w-full h-56 object-cover project-image" alt="Project 3">
+                        <div class="absolute inset-0 project-overlay flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        </div>
+                    </div>
+                    <div class="p-6 card-content flex flex-col flex-grow">
+                        <h3 class="text-xl font-semibold mb-2">Advanced DevSecOps Pipeline for a Node.js Application                        </h3>
+                        <p class="text-muted mb-4 text-sm flex-grow">
+                            Designed and implemented an end-to-end CI/CD pipeline using GitHub Actions to automatically build, test, and deploy a containerized Node.js application. <span class="font-bold"></span>.
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-sm accent-color my-4">
+                            <span>GitHub Actions</span><span>•</span><span>Kubernetes(Minikube)</span><span>•</span><span>Docker</span>•</span><span>SonarQube</span>•</span><span>Trivy</span>
+                        </div>
+                        <div class="flex justify-end items-center gap-4">
+                           <a href="https://github.com/ayanjyoti17/advanced-cicd-project" target="_blank" class="btn btn-secondary">View Code <i data-lucide="github" class="w-4 h-4"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 4 -->
+                <div class="card group rounded-lg overflow-hidden animated-section flex flex-col" style="transition-delay: 300ms;">
+                     <div class="relative overflow-hidden">
+                        <img src="https://placehold.co/600x400/0a0a0a/fb923c?text=Project+4" class="w-full h-56 object-cover project-image" alt="Project 4">
+                        <div class="absolute inset-0 project-overlay flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        </div>
+                    </div>
+                    <div class="p-6 card-content flex flex-col flex-grow">
+                        <h3 class="text-xl font-semibold mb-2">AWS Cloud Cost Optimization</h3>
+                        <p class="text-muted mb-4 text-sm flex-grow">
+                            Created a Lambda function that identifies EBS snapshots that are no longer associated with any active EC2 instance and deletes them to save on storage costs. <span class="font-bold"></span>.
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-sm accent-color my-4">
+                            <span>AWS</span><span>•</span><span>Python</span><span>•</span><span>EC2</span><span>•</span><span>Linux</span>
+                        </div>
+                        <div class="flex justify-end items-center gap-4">
+                           <a href="https://github.com/ayanjyoti17/Python-tasks-for-DevOps/tree/main/03.cost_optimization_aws_cloud" target="_blank" class="btn btn-secondary">View Code <i data-lucide="github" class="w-4 h-4"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <!-- Project 5 -->
+                <div class="card group rounded-lg overflow-hidden animated-section flex flex-col" style="transition-delay: 400ms;">
+                     <div class="relative overflow-hidden">
+                        <img src="https://placehold.co/600x400/0a0a0a/fb923c?text=Project+5" class="w-full h-56 object-cover project-image" alt="Project 5">
+                        <div class="absolute inset-0 project-overlay flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        </div>
+                    </div>
+                    <div class="p-6 card-content flex flex-col flex-grow">
+                        <h3 class="text-xl font-semibold mb-2">Dockerized Application Stack</h3>
+                        <p class="text-muted mb-4 text-sm flex-grow">
+                            Containerized a multi-service application with Docker Compose to create a <span class="font-bold">[Benefit, e.g., 'portable and consistent development environment']</span>.
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-sm accent-color my-4">
+                            <span>Docker</span><span>•</span><span>Docker Compose</span><span>•</span><span>MySQL</span>
+                        </div>
+                        <div class="flex justify-end items-center gap-4">
+                           <a href="https://github.com/your-username/your-repo-5" target="_blank" class="btn btn-secondary">View Code <i data-lucide="github" class="w-4 h-4"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <!-- Project 6 -->
+                <div class="card group rounded-lg overflow-hidden animated-section flex flex-col" style="transition-delay: 500ms;">
+                     <div class="relative overflow-hidden">
+                        <img src="https://placehold.co/600x400/0a0a0a/fb923c?text=Project+6" class="w-full h-56 object-cover project-image" alt="Project 6">
+                        <div class="absolute inset-0 project-overlay flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        </div>
+                    </div>
+                    <div class="p-6 card-content flex flex-col flex-grow">
+                        <h3 class="text-xl font-semibold mb-2">Automated Scripting</h3>
+                        <p class="text-muted mb-4 text-sm flex-grow">
+                           Developed Python and Bash scripts to automate routine tasks, saving <span class="font-bold">[Quantifiable Metric, e.g., 'hours of manual work per week']</span>.
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-sm accent-color my-4">
+                            <span>Python</span><span>•</span><span>Bash</span><span>•</span><span>Cron</span><span>•</span><span>Linux</span>
+                        </div>
+                        <div class="flex justify-end items-center gap-4">
+                           <a href="https://github.com/your-username/your-repo-6" target="_blank" class="btn btn-secondary">View Code <i data-lucide="github" class="w-4 h-4"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20">
+            <h2 class="text-3xl font-bold text-center mb-12"><span class="accent-color">./</span>Contact Me</h2>
+            <div class="flex flex-col md:flex-row gap-16">
+                <div class="md:w-1/2">
+                    <h3 class="text-2xl font-semibold mb-4">Drop a Mail</h3>
+                    <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                        <input type="hidden" name="access_key" value="97a82f8a-c612-442b-ba1a-39a2ac1f8511">
+                        
+                        <div class="mb-4">
+                            <input type="text" name="name" placeholder="Name" class="w-full p-3 rounded-md form-input" required>
+                        </div>
+                        <div class="mb-4">
+                            <input type="email" name="email" placeholder="Email" class="w-full p-3 rounded-md form-input" required>
+                        </div>
+                        <div class="mb-4">
+                            <textarea name="message" placeholder="Message" rows="5" class="w-full p-3 rounded-md form-input" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-full">Submit <i data-lucide="send" class="w-4 h-4"></i></button>
+                    </form>
+                    <div id="form-result" class="mt-4 text-center"></div>
+                </div>
+                <div class="md:w-1/2">
+                     <h3 class="text-2xl font-semibold mb-4">Have a bold idea?</h3>
+                     <p class="text-muted mb-8">
+                         Reach out, and let's create something extraordinary! I'm always open to discussing new projects and opportunities.
+                     </p>
+                     <div class="space-y-4">
+                        <a href="https://github.com/ayanjyoti17" target="_blank" class="flex items-center gap-3 nav-link w-max text-lg">
+                            <i data-lucide="github" class="w-7 h-7"></i>
+                            <span>github.com/ayanjyoti17</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/ayan-jyoti-b312b223a/" target="_blank" class="flex items-center gap-3 nav-link w-max text-lg">
+                            <i data-lucide="linkedin" class="w-7 h-7"></i>
+                            <span>linkedin.com/in/ayanjyoti17</span>
+                        </a>
+                        <a href="mailto:jyotiayan47@gmail.com" class="flex items-center gap-3 nav-link w-max text-lg">
+                             <i data-lucide="mail" class="w-7 h-7"></i>
+                             <span>jyotiayan47@gmail.com</span>
+                        </a>
+                     </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container mx-auto px-6 py-6 text-center text-muted">
+            <p>&copy; 2025 Made by Ayan Jyoti</p>
+        </div>
+    </footer>
+
+    <!-- --- Custom JavaScript --- -->
+    <script>
+        lucide.createIcons();
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (!mobileMenu.classList.contains('hidden')) {
+                     mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Theme Toggling Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+
+        const userTheme = localStorage.getItem('theme');
+        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        const themeCheck = () => {
+            if (userTheme === 'dark' || (!userTheme && systemTheme)) {
+                document.documentElement.classList.add('dark');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            } else {
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            }
+        };
+
+        const themeSwitch = () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                moonIcon.classList.add('hidden');
+                sunIcon.classList.remove('hidden');
+            }
+        };
+
+        themeToggleBtn.addEventListener('click', themeSwitch);
+        
+        themeCheck();
+
+        // Contact Form Logic
+        const form = document.getElementById('contact-form');
+        const result = document.getElementById('form-result');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const object = {};
+            formData.forEach((value, key) => {
+                object[key] = value;
+            });
+            const json = JSON.stringify(object);
+            result.innerHTML = "Sending...";
+
+            fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: json
+                })
+                .then(async (response) => {
+                    let json = await response.json();
+                    if (response.status == 200) {
+                        result.innerHTML = "Message sent successfully!";
+                        result.classList.add('accent-color');
+                    } else {
+                        console.log(response);
+                        result.innerHTML = json.message;
+                        result.classList.remove('accent-color');
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                    result.innerHTML = "Something went wrong!";
+                })
+                .then(function() {
+                    form.reset();
+                    setTimeout(() => {
+                        result.innerHTML = '';
+                        result.classList.remove('accent-color');
+                    }, 5000);
+                });
+        });
+
+         // Role animation logic
+        const roles = ["Aspiring DevOps Engineer", "Aspiring Cloud Engineer", "CSE Graduate"];
+        const roleElement = document.getElementById('role-title');
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeEffect() {
+            const currentRole = roles[roleIndex];
+            const typingSpeed = 75;
+            const deletingSpeed = 30;
+            const delayAfterTyping = 1000;
+
+            const currentText = isDeleting ?
+                currentRole.substring(0, charIndex - 1) :
+                currentRole.substring(0, charIndex + 1);
+
+            roleElement.textContent = currentText;
+
+            if (!isDeleting) {
+                charIndex++;
+            } else {
+                charIndex--;
+            }
+
+            if (!isDeleting && currentText === currentRole) {
+                // Finished typing
+                isDeleting = true;
+                setTimeout(typeEffect, delayAfterTyping);
+            } else if (isDeleting && currentText === '') {
+                // Finished deleting
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+                setTimeout(typeEffect, 500); // Pause before typing next role
+            } else {
+                // Continue animation
+                setTimeout(typeEffect, isDeleting ? deletingSpeed : typingSpeed);
+            }
+        }
+
+        if (roleElement && roles.length) {
+            setTimeout(typeEffect, 1000); // Initial delay before starting
+        }
+        
+        // Scroll Animation Logic
+        const animatedSections = document.querySelectorAll('.animated-section');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target); // Stop observing once visible
+                }
+            });
+        }, {
+            threshold: 0.1 // Trigger when 10% of the item is visible
+        });
+
+        animatedSections.forEach(item => {
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html>
+
